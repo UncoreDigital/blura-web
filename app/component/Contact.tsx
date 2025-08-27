@@ -167,7 +167,7 @@ export default function Contact() {
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
                 alt="LinkedIn"
-                class="w-5 h-5"
+                className="w-5 h-5"
               />
             </a>
           </div>
