@@ -54,12 +54,12 @@ export default function CanBafore() {
           opacity: 0,
           y: 30,
           duration: 0.2,
-          stagger: 0.2,
+          stagger: 0,
           ease: "power3.out",
         }).from(
           paraRef.current,
           { opacity: 0, y: 20, duration: 1 },
-          "-=0.2"
+          "-=0"
         );
 
         
@@ -101,7 +101,7 @@ export default function CanBafore() {
           ))} */}
         </span>
         <div
-          ref={paraRef}
+          
           className="w-full max-w-[1276px] shrink-0 font-['Plus_Jakarta_Sans'] text-[14px] md:text-[16px] lg:text-[18px] font-bold leading-[18px] md:leading-[20px] lg:leading-[22.68px] relative text-center z-[2]"
         >
           <span className="font-['Frank_Ruhl_Libre'] text-[14px] md:text-[16px] lg:text-[18px] font-bold leading-[18px] md:leading-[20px] lg:leading-[22.68px] text-[#fff] relative text-center">

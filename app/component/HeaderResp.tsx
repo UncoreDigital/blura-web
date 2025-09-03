@@ -12,7 +12,7 @@ export default function HeaderResp() {
       <div className="max-w-[1460px] mx-auto h-[84px] flex items-center justify-between px-6 lg:px-[55px]">
         {/* Logo */}
         <Image
-          src="/blura-logo-header.png"
+          src="/headerlogo.png"
           alt="Blüra Logo"
           width={120}
           height={40}

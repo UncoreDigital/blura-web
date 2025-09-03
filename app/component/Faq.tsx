@@ -29,7 +29,7 @@ export default function Faq() {
     },
   ];
 
-  const [activeIndex, setActiveIndex] = useState(1); // 2nd accordion open by default
+  const [activeIndex, setActiveIndex] = useState(-1); // 2nd accordion open by default
 
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const titleRef = useRef<HTMLDivElement | null>(null);

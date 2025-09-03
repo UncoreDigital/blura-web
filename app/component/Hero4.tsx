@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { gsap } from "gsap";
 
 import Hero from "./Hero";
 import HeroImg from "./HeroImg";
 export default function Hero4() {
   const words = ["STILLNESS", "NATURE", "YOU"];
-
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <section className="w-full bg-white overflow-hidden">
       {/* <div className="max-w-[1460px] relative mx-auto flex flex-col lg:flex-row items-center justify-between px-6 lg:px-12
@@ -41,7 +41,7 @@ export default function Hero4() {
             TO STILLNESS, TO NATURE, TO YOU.
           </h1> */}
 
-          <h1 className="font-['Frank_Ruhl_Libre'] text-[26px] sm:text-[32px] lg:text-[40px] font-semibold leading-snug text-[#071f43] flex items-center gap-2">
+          <h1 className="font-['Frank_Ruhl_Libre'] text-[26px] sm:text-[32px] lg:text-[36px] font-semibold leading-snug text-[#071f43] flex items-center gap-2">
             TO STILLNESS, TO NATURE, TO YOU.
             {/* <span className="blinking-cursor">|</span> */}
           </h1>
@@ -54,7 +54,7 @@ export default function Hero4() {
             sealed in sleek, sustainable aluminium cans.
           </p>
 
-          <button
+          <a href="#contact"
             className="
   px-6 py-3 
   bg-[#071f43] 
@@ -65,10 +65,9 @@ export default function Hero4() {
   border border-transparent
   transition duration-300
   hover:bg-transparent hover:text-[#071f43] hover:border-[#071f43] cursor-pointer
-"
-          >
+" onClick={() => setIsOpen(false)}>
             Elevate Your Hydration
-          </button>
+          </a>
         </div>
       </div>
 
