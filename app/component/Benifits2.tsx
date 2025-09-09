@@ -52,7 +52,7 @@ export default function Benefits() {
   }, []);
 
   return (
-    <section className="w-full bg-white py-16 px-6">
+    <section className="w-full bg-white py-16 px-6 h-[1100px] sm:h-[500px] lg:h-[470px]">
       {/* Heading */}
       <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-center mb-12 font-['Frank_Ruhl_Libre'] text-[#071f43]">
         Benefits of Drinking Blüra Water

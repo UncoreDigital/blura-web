@@ -78,3 +78,9 @@ body {
   width: 120%;
   height: 120%;
 }
+@media only screen and (max-device-width: 480px) {
+  .justify-center {
+    justify-content: center;
+    height: 285px !important;
+}
+}

@@ -54,7 +54,7 @@ export default function Reason() {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-white py-16 px-4 sm:px-8"
+      className="w-full bg-white h-[710px] sm:h-[600px] lg:h-[520px] py-16 px-4 sm:px-8 mobile-responsive-cls"
     >
       <div className="main-container max-w-[1270px] mx-auto flex flex-col lg:flex-row gap-12 lg:gap-[109px] items-center">
         {/* Left Image */}

@@ -35,7 +35,7 @@ export default function Shape() {
 
   return (
     <section
-      className="w-full bg-white py-16 px-4 sm:px-8 lg:px-12"
+      className="w-full h-[740px] sm:h-[600px] lg:h-[600px] bg-white py-16 px-4 sm:px-8 lg:px-12"
       id="our-story"
       ref={sectionRef}
     >

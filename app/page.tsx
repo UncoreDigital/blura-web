@@ -23,6 +23,7 @@ import Cursor6 from "./component/Cursor6";
 import Cursor7 from "./component/Cursor7";
 import Cursor8 from "./component/Cursor8";
 import Can2 from "./component/Can2";
+import Footer from "./component/Footer";
 export default function Home() {
   return (
     <div className="overflow-x-hidden">
@@ -40,7 +41,7 @@ export default function Home() {
       <ShapeResp />
       <Reason />
       {/* can after final responsive  */}
-      <div className="relative w-full h-[600px] my-16 group">
+      <div className="relative w-full h-[200px] sm:h-[600px] lg:h-[600px] my-16 group">
         {/* Default can */}
 
         <div className="hidden lg:block absolute inset-0 w-full h-full transition-opacity duration-[2000ms] group-hover:opacity-0">
@@ -58,7 +59,7 @@ export default function Home() {
           <div
             className="lg:hidden w-full h-full flex items-center justify-center"
             style={{
-              height: "600px",
+              height: "250px",
               width: "1094px",
               backgroundColor: "#071f43",
             }}
@@ -69,7 +70,7 @@ export default function Home() {
 
         <div
           className="lg:hidden w-full h-full flex items-center justify-center"
-          style={{ height: "600px", backgroundColor: "#071f43" }}
+          style={{ height: "270px", backgroundColor: "#071f43" }}
         >
           <Can2 />
         </div>
@@ -89,6 +90,7 @@ export default function Home() {
       {/* <Cursor6 /> */}
       {/* <Cursor7 /> */}
       <Cursor8 />
+<Footer />  {/* 👈 Footer here */}
 
       {/* cursor number 5,7 and 8 working */}
     </div>
