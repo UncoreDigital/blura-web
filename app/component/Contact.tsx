@@ -95,7 +95,7 @@ export default function Contact() {
 
         {/* Right Form */}
         <div ref={rightRef} className="bg-white px-6 sm:px-12 lg:px-24 py-12 flex-1">
-          <h3 className="font-['Frank_Ruhl_Libre'] text-3xl sm:text-4xl mb-2">Have Questions? sgdggdg Let’s Connect!</h3>
+          <h3 className="font-['Frank_Ruhl_Libre'] text-3xl sm:text-4xl mb-2">Have Questions? Let’s Connect!</h3>
           <p className="font-['Frank_Ruhl_Libre'] text-gray-700 mb-6">We’re here to help - reach out to learn more</p>
 
           {/* ✅ Success Message */}
