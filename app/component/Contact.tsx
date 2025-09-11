@@ -7,98 +7,16 @@ import emailjs from "@emailjs/browser";
 
 gsap.registerPlugin(ScrollTrigger);
 
-
 export default function Contact() {
-const formRef = useRef<HTMLFormElement>(null);
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const leftRef = useRef<HTMLDivElement | null>(null);
+  const rightRef = useRef<HTMLDivElement | null>(null);
+  const formRef = useRef<HTMLFormElement | null>(null);
 
-  const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const [openTerms, setOpenTerms] = useState(false);
+  const [openPrivacy, setOpenPrivacy] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(""); // ✅ success state
 
-    // Replace with your Google Form POST URL
-    const formUrl =
-      "https://script.google.com/macros/s/AKfycbxZDa-eKBQkE_fdOz-OJYMTvKS9ZpQbc2ouOgM6ZiPOEENY8_yP8AuAQ4uxU3lrHd4XrQ/exec";
-
-    // Replace these with actual entry IDs from your form
-    const data = new FormData();
-    data.append("entry.1234567890", (e.currentTarget.elements.namedItem("name") as HTMLInputElement).value);
-    data.append("entry.987654321", (e.currentTarget.elements.namedItem("email") as HTMLInputElement).value);
-    data.append("entry.5555555555", (e.currentTarget.elements.namedItem("phone") as HTMLInputElement).value);
-    data.append("entry.4444444444", (e.currentTarget.elements.namedItem("business") as HTMLSelectElement).value);
-    data.append("entry.3333333333", (e.currentTarget.elements.namedItem("message") as HTMLTextAreaElement).value);
-
-    try {
-      await fetch(formUrl, {
-        method: "POST",
-        mode: "no-cors", // 👈 required for Google Forms
-        body: data,
-      });
-
-      alert("✅ Message sent successfully!");
-      formRef.current?.reset();
-    } catch (err) {
-      console.error("Fetch error:", err);
-      alert("⚠️ Something went wrong. Please try again later.");
-    }
-  };
-
-  return (
-    <form
-      ref={formRef}
-      onSubmit={sendEmail}
-      className="flex flex-col gap-4 max-w-lg mx-auto"
-    >
-      <div className="flex flex-col sm:flex-row gap-4">
-        <input
-          type="text"
-          name="name"
-          placeholder="First Name"
-          required
-          className="border-b border-black px-2 py-2 outline-none"
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email Address"
-          required
-          className="border-b border-black px-2 py-2 outline-none"
-        />
-      </div>
-
-      <input
-        type="tel"
-        name="phone"
-        placeholder="Phone Number"
-        className="border-b border-black px-2 py-2 outline-none"
-      />
-
-      <select
-        name="business"
-        className="border-b border-black px-2 py-2 outline-none"
-      >
-        <option>Select Business</option>
-        <option>Cafe</option>
-        <option>Hotels</option>
-        <option>Retailers</option>
-        <option>Event organizers</option>
-        <option>Distributor</option>
-      </select>
-
-      <textarea
-        name="message"
-        placeholder="Write your message..."
-        rows={3}
-        required
-        className="border-b border-black px-2 py-2 outline-none"
-      />
-
-      <button
-        type="submit"
-        className="px-6 py-3 bg-[#071f43] text-white text-[16px] font-semibold shadow transition duration-300 hover:bg-transparent hover:text-[#071f43] hover:border-[#071f43] border cursor-pointer"
-      >
-        Contact Us Now
-      </button>
-    </form>
-  );
   useEffect(() => {
     if (!sectionRef.current) return;
 
@@ -119,7 +37,33 @@ const formRef = useRef<HTMLFormElement>(null);
     return () => ctx.revert();
   }, []);
 
+  // ✅ Handle EmailJS Submit
+  const sendEmail = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formRef.current) return;
 
+    emailjs
+      .sendForm(
+        "",   // replace with EmailJS service ID
+        "",  // replace with EmailJS template ID
+        formRef.current,
+        ""    // replace with EmailJS public key
+      )
+      .then(
+        () => {
+          setSuccessMessage("Thank you for reaching out. Your request has been received. Expect to hear from us within 24 hours.");
+          formRef.current?.reset();
+
+          // hide message after 5–7 sec
+          setTimeout(() => setSuccessMessage(""), 6000);
+        },
+        (error) => {
+          console.error("EmailJS Error:", error);
+          setSuccessMessage("❌ Failed to send inquiry. Please try again.");
+          setTimeout(() => setSuccessMessage(""), 6000);
+        }
+      );
+  };
 
   return (
     <section ref={sectionRef} className="w-full bg-white" id="contact">
@@ -151,7 +95,7 @@ const formRef = useRef<HTMLFormElement>(null);
 
         {/* Right Form */}
         <div ref={rightRef} className="bg-white px-6 sm:px-12 lg:px-24 py-12 flex-1">
-          <h3 className="font-['Frank_Ruhl_Libre'] text-3xl sm:text-4xl mb-2">Have Questions? sadasdad Let’s Connect!</h3>
+          <h3 className="font-['Frank_Ruhl_Libre'] text-3xl sm:text-4xl mb-2">Have Questions? Let’s Connect!</h3>
           <p className="font-['Frank_Ruhl_Libre'] text-gray-700 mb-6">We’re here to help - reach out to learn more</p>
 
           {/* ✅ Success Message */}
