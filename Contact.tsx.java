@@ -21,7 +21,7 @@ export default function Contact() {
 
     try {
       const response = await fetch(
-        "YOUR_WEB_APP_URL_HERE", // Replace with your Google Apps Script URL
+        "https://script.google.com/macros/s/AKfycbxZDa-eKBQkE_fdOz-OJYMTvKS9ZpQbc2ouOgM6ZiPOEENY8_yP8AuAQ4uxU3lrHd4XrQ/exec", // Replace with your Google Apps Script URL
         {
           method: "POST",
           body: formData,
