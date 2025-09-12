@@ -19,7 +19,7 @@ export default function Contact() {
 
     // ⚠️ Replace with your new deployed Google Apps Script URL
     const formUrl =
-      "https://script.google.com/macros/s/PASTE-YOUR-DEPLOYMENT-ID/exec";
+      "https://script.google.com/macros/s/AKfycbxZDa-eKBQkE_fdOz-OJYMTvKS9ZpQbc2ouOgM6ZiPOEENY8_yP8AuAQ4uxU3lrHd4XrQ/exec";
 
     // Collect form data
     const payload = {
