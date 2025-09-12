@@ -14,27 +14,26 @@ export default function Contact() {
   const [successMessage, setSuccessMessage] = useState<string>("");
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const formUrl =
-      "https://script.google.com/macros/s/AKfycbxZDa-eKBQkE_fdOz-OJYMTvKS9ZpQbc2ouOgM6ZiPOEENY8_yP8AuAQ4uxU3lrHd4XrQ/exec";
+  const formData = new FormData(e.currentTarget);
 
-    const formData = new FormData(e.currentTarget);
-
-    try {
-      await fetch(formUrl, {
+  try {
+    const response = await fetch(
+      "https://script.google.com/macros/s/AKfycbxZDa-eKBQkE_fdOz-OJYMTvKS9ZpQbc2ouOgM6ZiPOEENY8_yP8AuAQ4uxU3lrHd4XrQ/exec",
+      {
         method: "POST",
-        body: formData,
-      });
+        body: formData, // send as FormData (not JSON)
+      }
+    );
 
-      setSuccessMessage("✅ Message sent successfully!");
-      formRef.current?.reset();
-      setTimeout(() => setSuccessMessage(""), 5000);
-    } catch (err) {
-      console.error("Fetch error:", err);
-      setSuccessMessage("⚠️ Something went wrong. Please try again later.");
-    }
-  };
+    const result = await response.json();
+    console.log("Server response:", result);
+  } catch (err) {
+    console.error("Fetch error:", err);
+  }
+};
+
 
   useEffect(() => {
     if (!sectionRef.current) return;
