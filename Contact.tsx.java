@@ -14,36 +14,34 @@ export default function Contact() {
   const [successMessage, setSuccessMessage] = useState<string>("");
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const formData = new FormData(e.currentTarget);
+    if (!formRef.current) return;
+    const formData = new FormData(formRef.current);
 
-  try {
-    const response = await fetch(
-      "YOUR_WEB_APP_URL_HERE", // replace with your Apps Script URL
-      {
-        method: "POST",
-        body: formData,
+    try {
+      const response = await fetch(
+        "YOUR_WEB_APP_URL_HERE", // Replace with your Google Apps Script URL
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const result = await response.json();
+      console.log("Server response:", result);
+
+      if (result.result === "success") {
+        setSuccessMessage("Your message has been sent successfully!");
+        formRef.current.reset();
+      } else {
+        setSuccessMessage("Something went wrong. Please try again.");
       }
-    );
-
-    const result = await response.json();
-    console.log("Server response:", result);
-
-    if (result.result === "success") {
-      setSuccessMessage("Your message has been sent successfully!");
-      e.currentTarget.reset(); // clear the form
-    } else {
-      setSuccessMessage("Something went wrong. Please try again.");
+    } catch (err) {
+      console.error("Fetch error:", err);
+      setSuccessMessage("Error sending message. Please try again.");
     }
-
-  } catch (err) {
-    console.error("Fetch error:", err);
-    setSuccessMessage("Error sending message. Please try again.");
-  }
-};
-
-
+  };
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -82,7 +80,7 @@ export default function Contact() {
           }
         );
       }
-    }, sectionRef);
+    }, sectionRef.current); // Pass the DOM element
 
     return () => ctx.revert();
   }, []);
@@ -99,8 +97,7 @@ export default function Contact() {
             be a blüra being
           </h2>
           <p className="text-sm sm:text-base font-light leading-relaxed">
-            blüra is our answer to your luxury that doesn’t come at a planetary
-            cost...
+            blüra is our answer to your luxury that doesn’t come at a planetary cost...
           </p>
           <div className="flex flex-col gap-4">
             <div className="flex gap-3 items-center">
@@ -132,11 +129,31 @@ export default function Contact() {
 
           <form ref={formRef} onSubmit={sendEmail} className="flex flex-col gap-4">
             <div className="flex flex-col sm:flex-row gap-4">
-              <input type="text" name="name" placeholder="First Name" required className="border-b border-black px-2 py-2 outline-none" />
-              <input type="email" name="email" placeholder="Email Address" required className="border-b border-black px-2 py-2 outline-none" />
+              <input
+                type="text"
+                name="name"
+                placeholder="First Name"
+                required
+                className="border-b border-black px-2 py-2 outline-none"
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email Address"
+                required
+                className="border-b border-black px-2 py-2 outline-none"
+              />
             </div>
-            <input type="tel" name="phone" placeholder="Phone Number" className="border-b border-black px-2 py-2 outline-none" />
-            <select name="business" className="border-b border-black px-2 py-2 outline-none">
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Phone Number"
+              className="border-b border-black px-2 py-2 outline-none"
+            />
+            <select
+              name="business"
+              className="border-b border-black px-2 py-2 outline-none"
+            >
               <option value="">Select Business</option>
               <option value="Cafe">Cafe</option>
               <option value="Hotels">Hotels</option>
@@ -144,8 +161,17 @@ export default function Contact() {
               <option value="Event organizers">Event organizers</option>
               <option value="Distributor">Distributor</option>
             </select>
-            <textarea name="message" placeholder="Write your message..." rows={3} required className="border-b border-black px-2 py-2 outline-none" />
-            <button type="submit" className="px-6 py-3 bg-[#071f43] text-white text-[16px] font-semibold shadow hover:bg-transparent hover:text-[#071f43] hover:border-[#071f43] border">
+            <textarea
+              name="message"
+              placeholder="Write your message..."
+              rows={3}
+              required
+              className="border-b border-black px-2 py-2 outline-none"
+            />
+            <button
+              type="submit"
+              className="px-6 py-3 bg-[#071f43] text-white text-[16px] font-semibold shadow hover:bg-transparent hover:text-[#071f43] hover:border-[#071f43] border"
+            >
               Contact Us Now
             </button>
           </form>
