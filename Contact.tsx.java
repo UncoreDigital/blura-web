@@ -19,28 +19,23 @@ export default function Contact() {
   const formUrl =
     "https://script.google.com/macros/s/AKfycbxZDa-eKBQkE_fdOz-OJYMTvKS9ZpQbc2ouOgM6ZiPOEENY8_yP8AuAQ4uxU3lrHd4XrQ/exec";
 
- const payload = {
-  name: (e.currentTarget.elements.namedItem("name") as HTMLInputElement).value,
-  email: (e.currentTarget.elements.namedItem("email") as HTMLInputElement).value,
-  phone: (e.currentTarget.elements.namedItem("phone") as HTMLInputElement).value,
-  business: (e.currentTarget.elements.namedItem("business") as HTMLSelectElement).value,
-  message: (e.currentTarget.elements.namedItem("message") as HTMLTextAreaElement).value,
+  const formData = new FormData(e.currentTarget);
+
+  try {
+    await fetch(formUrl, {
+      method: "POST",
+      body: formData,
+    });
+
+    setSuccessMessage("✅ Message sent successfully!");
+    formRef.current?.reset();
+    setTimeout(() => setSuccessMessage(""), 5000);
+  } catch (err) {
+    console.error("Fetch error:", err);
+    setSuccessMessage("⚠️ Something went wrong. Please try again later.");
+  }
 };
 
-try {
-  const response = await fetch(formUrl, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-
-  const result = await response.json();
-  console.log("Server response:", result);
-} catch (err) {
-  console.error("Fetch error:", err);
-}
-
-};
 
 
 
