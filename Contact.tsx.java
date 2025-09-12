@@ -13,16 +13,13 @@ export default function Contact() {
 
   const [successMessage, setSuccessMessage] = useState<string>("");
 
-  // ✅ FIXED sendEmail
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    // ⚠️ Replace with your new deployed Google Apps Script URL
-    const formUrl =
-      "https://script.google.com/macros/s/AKfycbxZDa-eKBQkE_fdOz-OJYMTvKS9ZpQbc2ouOgM6ZiPOEENY8_yP8AuAQ4uxU3lrHd4XrQ/exec";
+  const formUrl =
+    "https://script.google.com/macros/s/AKfycbxZDa-eKBQkE_fdOz-OJYMTvKS9ZpQbc2ouOgM6ZiPOEENY8_yP8AuAQ4uxU3lrHd4XrQ/exec";
 
-    // Collect form data
-const payload = {
+ const payload = {
   name: (e.currentTarget.elements.namedItem("name") as HTMLInputElement).value,
   email: (e.currentTarget.elements.namedItem("email") as HTMLInputElement).value,
   phone: (e.currentTarget.elements.namedItem("phone") as HTMLInputElement).value,
@@ -30,32 +27,23 @@ const payload = {
   message: (e.currentTarget.elements.namedItem("message") as HTMLTextAreaElement).value,
 };
 
+try {
+  const response = await fetch(formUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  const result = await response.json();
+  console.log("Server response:", result);
+} catch (err) {
+  console.error("Fetch error:", err);
+}
+
+};
 
 
-    try {
-      const response = await fetch(formUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
 
-      const result = await response.json();
-      console.log("Server response:", result);
-
-      if (result.result === "success") {
-        setSuccessMessage("✅ Message sent successfully!");
-        formRef.current?.reset();
-        setTimeout(() => setSuccessMessage(""), 5000);
-      } else {
-        setSuccessMessage("⚠️ Error: " + result.error);
-      }
-    } catch (err) {
-      console.error("Fetch error:", err);
-      setSuccessMessage("⚠️ Something went wrong. Please try again later.");
-    }
-  };
-
-  // Animations
   useEffect(() => {
     if (!sectionRef.current) return;
 
