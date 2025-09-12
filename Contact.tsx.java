@@ -14,30 +14,27 @@ export default function Contact() {
   const [successMessage, setSuccessMessage] = useState<string>("");
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const formUrl =
-    "https://script.google.com/macros/s/AKfycbxZDa-eKBQkE_fdOz-OJYMTvKS9ZpQbc2ouOgM6ZiPOEENY8_yP8AuAQ4uxU3lrHd4XrQ/exec";
+    const formUrl =
+      "https://script.google.com/macros/s/AKfycbxZDa-eKBQkE_fdOz-OJYMTvKS9ZpQbc2ouOgM6ZiPOEENY8_yP8AuAQ4uxU3lrHd4XrQ/exec";
 
-  const formData = new FormData(e.currentTarget);
+    const formData = new FormData(e.currentTarget);
 
-  try {
-    await fetch(formUrl, {
-      method: "POST",
-      body: formData,
-    });
+    try {
+      await fetch(formUrl, {
+        method: "POST",
+        body: formData,
+      });
 
-    setSuccessMessage("✅ Message sent successfully!");
-    formRef.current?.reset();
-    setTimeout(() => setSuccessMessage(""), 5000);
-  } catch (err) {
-    console.error("Fetch error:", err);
-    setSuccessMessage("⚠️ Something went wrong. Please try again later.");
-  }
-};
-
-
-
+      setSuccessMessage("✅ Message sent successfully!");
+      formRef.current?.reset();
+      setTimeout(() => setSuccessMessage(""), 5000);
+    } catch (err) {
+      console.error("Fetch error:", err);
+      setSuccessMessage("⚠️ Something went wrong. Please try again later.");
+    }
+  };
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -89,29 +86,19 @@ export default function Contact() {
           ref={leftRef}
           className="bg-[#071f43] text-white px-6 sm:px-12 lg:px-24 py-12 flex-1 flex flex-col gap-6"
         >
-          <h2 className="font-['Frank_Ruhl_Libre'] text-3xl sm:text-4xl font-bold capitalize">
+          <h2 className="text-3xl sm:text-4xl font-bold capitalize">
             be a blüra being
           </h2>
-          <p className="font-['Frank_Ruhl_Libre'] text-sm sm:text-base font-light leading-relaxed">
+          <p className="text-sm sm:text-base font-light leading-relaxed">
             blüra is our answer to your luxury that doesn’t come at a planetary
-            cost. It’s a brand built on transparency and taste. A chilled can
-            against your palm. The first sip. The sudden pause inside you.
-            That’s not hydration. That’s healing. That’s nature, grounding you
-            again. <br />
-            <br />
-            If that’s you, welcome. You’re one of us. A{" "}
-            <strong>blüra being</strong>.
+            cost...
           </p>
           <div className="flex flex-col gap-4">
             <div className="flex gap-3 items-center">
-              <div className="w-5 h-5 bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-08-21/CK6SNG0NLD.png)] bg-cover bg-no-repeat" />
-              <span className="font-['Frank_Ruhl_Libre']">+91- 7990394138</span>
+              <span>+91- 7990394138</span>
             </div>
             <div className="flex gap-3 items-center">
-              <div className="w-5 h-5 bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-08-21/WF6wqEaxAH.png)] bg-cover bg-no-repeat" />
-              <span className="font-['Frank_Ruhl_Libre']">
-                contact@bluralife.com
-              </span>
+              <span>contact@bluralife.com</span>
             </div>
           </div>
         </div>
@@ -121,10 +108,10 @@ export default function Contact() {
           ref={rightRef}
           className="bg-white px-6 sm:px-12 lg:px-24 py-12 flex-1"
         >
-          <h3 className="font-['Frank_Ruhl_Libre'] text-3xl sm:text-4xl mb-2">
+          <h3 className="text-3xl sm:text-4xl mb-2">
             Have Questions? Let’s Connect!
           </h3>
-          <p className="font-['Frank_Ruhl_Libre'] text-gray-700 mb-6">
+          <p className="text-gray-700 mb-6">
             We’re here to help - reach out to learn more
           </p>
 
@@ -136,49 +123,20 @@ export default function Contact() {
 
           <form ref={formRef} onSubmit={sendEmail} className="flex flex-col gap-4">
             <div className="flex flex-col sm:flex-row gap-4">
-              <input
-                type="text"
-                name="name"
-                placeholder="First Name"
-                required
-                className="border-b border-black px-2 py-2 outline-none"
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email Address"
-                required
-                className="border-b border-black px-2 py-2 outline-none"
-              />
+              <input type="text" name="name" placeholder="First Name" required className="border-b border-black px-2 py-2 outline-none" />
+              <input type="email" name="email" placeholder="Email Address" required className="border-b border-black px-2 py-2 outline-none" />
             </div>
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Phone Number"
-              className="border-b border-black px-2 py-2 outline-none"
-            />
-            <select
-              name="business"
-              className="border-b border-black px-2 py-2 outline-none"
-            >
-              <option>Select Business</option>
-              <option>Cafe</option>
-              <option>Hotels</option>
-              <option>Retailers</option>
-              <option>Event organizers</option>
-              <option>Distributor</option>
+            <input type="tel" name="phone" placeholder="Phone Number" className="border-b border-black px-2 py-2 outline-none" />
+            <select name="business" className="border-b border-black px-2 py-2 outline-none">
+              <option value="">Select Business</option>
+              <option value="Cafe">Cafe</option>
+              <option value="Hotels">Hotels</option>
+              <option value="Retailers">Retailers</option>
+              <option value="Event organizers">Event organizers</option>
+              <option value="Distributor">Distributor</option>
             </select>
-            <textarea
-              name="message"
-              placeholder="Write your message..."
-              rows={3}
-              required
-              className="border-b border-black px-2 py-2 outline-none"
-            />
-            <button
-              type="submit"
-              className="px-6 py-3 bg-[#071f43] text-white text-[16px] font-semibold shadow transition duration-300 hover:bg-transparent hover:text-[#071f43] hover:border-[#071f43] border cursor-pointer"
-            >
+            <textarea name="message" placeholder="Write your message..." rows={3} required className="border-b border-black px-2 py-2 outline-none" />
+            <button type="submit" className="px-6 py-3 bg-[#071f43] text-white text-[16px] font-semibold shadow hover:bg-transparent hover:text-[#071f43] hover:border-[#071f43] border">
               Contact Us Now
             </button>
           </form>
