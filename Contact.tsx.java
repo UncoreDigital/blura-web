@@ -16,47 +16,40 @@ export default function Contact() {
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formUrl =
-      "https://script.google.com/macros/s/AKfycbxZDa-eKBQkE_fdOz-OJYMTvKS9ZpQbc2ouOgM6ZiPOEENY8_yP8AuAQ4uxU3lrHd4XrQ/exec";
+    const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
 
-    const data = new FormData();
-    data.append(
-      "entry.1234567890",
-      (e.currentTarget.elements.namedItem("name") as HTMLInputElement).value
-    );
-    data.append(
-      "entry.987654321",
-      (e.currentTarget.elements.namedItem("email") as HTMLInputElement).value
-    );
-    data.append(
-      "entry.5555555555",
-      (e.currentTarget.elements.namedItem("phone") as HTMLInputElement).value
-    );
-    data.append(
-      "entry.4444444444",
-      (e.currentTarget.elements.namedItem("business") as HTMLSelectElement).value
-    );
-    data.append(
-      "entry.3333333333",
-      (e.currentTarget.elements.namedItem("message") as HTMLTextAreaElement).value
-    );
+  const formUrl =
+    "https://script.google.com/macros/s/AKfycbxZDa-eKBQkE_fdOz-OJYMTvKS9ZpQbc2ouOgM6ZiPOEENY8_yP8AuAQ4uxU3lrHd4XrQ/exec";
 
-    try {
-      await fetch(formUrl, {
-        method: "POST",
-        mode: "no-cors",
-        body: data,
-      });
-
-      setSuccessMessage("✅ Message sent successfully!");
-      formRef.current?.reset();
-
-      setTimeout(() => setSuccessMessage(""), 5000);
-    } catch (err) {
-      console.error("Fetch error:", err);
-      setSuccessMessage("⚠️ Something went wrong. Please try again later.");
-    }
+  const payload = {
+    name: (e.currentTarget.elements.namedItem("name") as HTMLInputElement).value,
+    email: (e.currentTarget.elements.namedItem("email") as HTMLInputElement).value,
+    phone: (e.currentTarget.elements.namedItem("phone") as HTMLInputElement).value,
+    business: (e.currentTarget.elements.namedItem("business") as HTMLSelectElement).value,
+    message: (e.currentTarget.elements.namedItem("message") as HTMLTextAreaElement).value,
   };
+
+  try {
+    const response = await fetch(formUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    const result = await response.json();
+    console.log(result);
+
+    setSuccessMessage("✅ Message sent successfully!");
+    formRef.current?.reset();
+
+    setTimeout(() => setSuccessMessage(""), 5000);
+  } catch (err) {
+    console.error("Fetch error:", err);
+    setSuccessMessage("⚠️ Something went wrong. Please try again later.");
+  }
+};
+
 
   useEffect(() => {
     if (!sectionRef.current) return;
