@@ -11,17 +11,17 @@ export default function Contact() {
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
 
-  const [successMessage, setSuccessMessage] = useState<string>("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     if (!formRef.current) return;
+
     const formData = new FormData(formRef.current);
 
     try {
       const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbxZDa-eKBQkE_fdOz-OJYMTvKS9ZpQbc2ouOgM6ZiPOEENY8_yP8AuAQ4uxU3lrHd4XrQ/exec", // Replace with your Google Apps Script URL
+        "https://script.google.com/macros/s/AKfycbxZDa-eKBQkE_fdOz-OJYMTvKS9ZpQbc2ouOgM6ZiPOEENY8_yP8AuAQ4uxU3lrHd4XrQ/exec", // Replace with your Apps Script URL
         {
           method: "POST",
           body: formData,
@@ -29,7 +29,6 @@ export default function Contact() {
       );
 
       const result = await response.json();
-      console.log("Server response:", result);
 
       if (result.result === "success") {
         setSuccessMessage("Your message has been sent successfully!");
@@ -38,7 +37,7 @@ export default function Contact() {
         setSuccessMessage("Something went wrong. Please try again.");
       }
     } catch (err) {
-      console.error("Fetch error:", err);
+      console.error(err);
       setSuccessMessage("Error sending message. Please try again.");
     }
   };
@@ -47,7 +46,7 @@ export default function Contact() {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      if (leftRef.current) {
+      leftRef.current &&
         gsap.fromTo(
           leftRef.current,
           { x: -100, opacity: 0 },
@@ -62,9 +61,8 @@ export default function Contact() {
             },
           }
         );
-      }
 
-      if (rightRef.current) {
+      rightRef.current &&
         gsap.fromTo(
           rightRef.current,
           { x: 100, opacity: 0 },
@@ -79,8 +77,7 @@ export default function Contact() {
             },
           }
         );
-      }
-    }, sectionRef.current); // Pass the DOM element
+    }, sectionRef.current);
 
     return () => ctx.revert();
   }, []);
@@ -132,7 +129,7 @@ export default function Contact() {
               <input
                 type="text"
                 name="name"
-                placeholder="First Name"
+                placeholder="Name"
                 required
                 className="border-b border-black px-2 py-2 outline-none"
               />
