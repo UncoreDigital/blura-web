@@ -14,9 +14,6 @@ export default function Contact() {
   const [successMessage, setSuccessMessage] = useState<string>("");
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
 
   const formUrl =
@@ -40,15 +37,19 @@ export default function Contact() {
     const result = await response.json();
     console.log(result);
 
-    setSuccessMessage("✅ Message sent successfully!");
-    formRef.current?.reset();
-
-    setTimeout(() => setSuccessMessage(""), 5000);
+    if (result.result === "success") {
+      setSuccessMessage("✅ Message sent successfully!");
+      formRef.current?.reset();
+      setTimeout(() => setSuccessMessage(""), 5000);
+    } else {
+      setSuccessMessage("⚠️ Error: " + result.error);
+    }
   } catch (err) {
     console.error("Fetch error:", err);
     setSuccessMessage("⚠️ Something went wrong. Please try again later.");
   }
 };
+
 
 
   useEffect(() => {
