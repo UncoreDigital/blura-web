@@ -22,13 +22,15 @@ export default function Contact() {
       "https://script.google.com/macros/s/AKfycbxZDa-eKBQkE_fdOz-OJYMTvKS9ZpQbc2ouOgM6ZiPOEENY8_yP8AuAQ4uxU3lrHd4XrQ/exec";
 
     // Collect form data
-    const payload = {
-      name: (e.currentTarget.elements.namedItem("name") as HTMLInputElement).value,
-      email: (e.currentTarget.elements.namedItem("email") as HTMLInputElement).value,
-      phone: (e.currentTarget.elements.namedItem("phone") as HTMLInputElement).value,
-      business: (e.currentTarget.elements.namedItem("business") as HTMLSelectElement).value,
-      message: (e.currentTarget.elements.namedItem("message") as HTMLTextAreaElement).value,
-    };
+const payload = {
+  name: (e.currentTarget.elements.namedItem("name") as HTMLInputElement).value,
+  email: (e.currentTarget.elements.namedItem("email") as HTMLInputElement).value,
+  phone: (e.currentTarget.elements.namedItem("phone") as HTMLInputElement).value,
+  business: (e.currentTarget.elements.namedItem("business") as HTMLSelectElement).value,
+  message: (e.currentTarget.elements.namedItem("message") as HTMLTextAreaElement).value,
+};
+
+
 
     try {
       const response = await fetch(formUrl, {
