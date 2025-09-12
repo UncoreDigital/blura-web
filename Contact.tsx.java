@@ -20,19 +20,29 @@ export default function Contact() {
 
   try {
     const response = await fetch(
-      "https://script.google.com/macros/s/AKfycbxZDa-eKBQkE_fdOz-OJYMTvKS9ZpQbc2ouOgM6ZiPOEENY8_yP8AuAQ4uxU3lrHd4XrQ/exec",
+      "YOUR_WEB_APP_URL_HERE", // replace with your Apps Script URL
       {
         method: "POST",
-        body: formData, // send as FormData (not JSON)
+        body: formData,
       }
     );
 
     const result = await response.json();
     console.log("Server response:", result);
+
+    if (result.result === "success") {
+      setSuccessMessage("Your message has been sent successfully!");
+      e.currentTarget.reset(); // clear the form
+    } else {
+      setSuccessMessage("Something went wrong. Please try again.");
+    }
+
   } catch (err) {
     console.error("Fetch error:", err);
+    setSuccessMessage("Error sending message. Please try again.");
   }
 };
+
 
 
   useEffect(() => {
