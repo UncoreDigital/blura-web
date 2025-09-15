@@ -1,62 +1,14 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Contact() {
-  const formRef = useRef<HTMLFormElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
-
-  const [successMessage, setSuccessMessage] = useState<string>("");
-
-  const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formUrl =
-      "https://script.google.com/macros/s/AKfycbxZDa-eKBQkE_fdOz-OJYMTvKS9ZpQbc2ouOgM6ZiPOEENY8_yP8AuAQ4uxU3lrHd4XrQ/exec";
-
-    const data = new FormData();
-    data.append(
-      "entry.1234567890",
-      (e.currentTarget.elements.namedItem("name") as HTMLInputElement).value
-    );
-    data.append(
-      "entry.987654321",
-      (e.currentTarget.elements.namedItem("email") as HTMLInputElement).value
-    );
-    data.append(
-      "entry.5555555555",
-      (e.currentTarget.elements.namedItem("phone") as HTMLInputElement).value
-    );
-    data.append(
-      "entry.4444444444",
-      (e.currentTarget.elements.namedItem("business") as HTMLSelectElement).value
-    );
-    data.append(
-      "entry.3333333333",
-      (e.currentTarget.elements.namedItem("message") as HTMLTextAreaElement).value
-    );
-
-    try {
-      await fetch(formUrl, {
-        method: "POST",
-        mode: "no-cors",
-        body: data,
-      });
-
-      setSuccessMessage("✅ Message sent successfully!");
-      formRef.current?.reset();
-
-      setTimeout(() => setSuccessMessage(""), 5000);
-    } catch (err) {
-      console.error("Fetch error:", err);
-      setSuccessMessage("⚠️ Something went wrong. Please try again later.");
-    }
-  };
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -135,7 +87,7 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* Right Form */}
+        {/* Right Iframe */}
         <div
           ref={rightRef}
           className="bg-white px-6 sm:px-12 lg:px-24 py-12 flex-1"
@@ -147,60 +99,13 @@ export default function Contact() {
             We’re here to help - reach out to learn more
           </p>
 
-          {successMessage && (
-            <div className="mb-4 p-3 rounded-lg bg-green-100 text-green-700 border border-green-300">
-              {successMessage}
-            </div>
-          )}
-
-          <form ref={formRef} onSubmit={sendEmail} className="flex flex-col gap-4">
-            <div className="flex flex-col sm:flex-row gap-4">
-              <input
-                type="text"
-                name="name"
-                placeholder="First Name"
-                required
-                className="border-b border-black px-2 py-2 outline-none"
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email Address"
-                required
-                className="border-b border-black px-2 py-2 outline-none"
-              />
-            </div>
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Phone Number"
-              className="border-b border-black px-2 py-2 outline-none"
-            />
-            <select
-              name="business"
-              className="border-b border-black px-2 py-2 outline-none"
-            >
-              <option>Select Business</option>
-              <option>Cafe</option>
-              <option>Hotels</option>
-              <option>Retailers</option>
-              <option>Event organizers</option>
-              <option>Distributor</option>
-            </select>
-            <textarea
-              name="message"
-              placeholder="Write your message..."
-              rows={3}
-              required
-              className="border-b border-black px-2 py-2 outline-none"
-            />
-            <button
-              type="submit"
-              className="px-6 py-3 bg-[#071f43] text-white text-[16px] font-semibold shadow transition duration-300 hover:bg-transparent hover:text-[#071f43] hover:border-[#071f43] border cursor-pointer"
-            >
-              Contact Us Now
-            </button>
-          </form>
+          <iframe
+            src="https://kaironixsolution.com/contact-form/"
+            width="100%"
+            height="450"
+            style={{ border: "none" }}
+            title="Contact Form"
+          />
         </div>
       </div>
     </section>
