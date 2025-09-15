@@ -1,87 +1,112 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Contact() {
-  const formRef = useRef<HTMLFormElement>(null);
-  const [successMessage, setSuccessMessage] = useState("");
+  const sectionRef = useRef<HTMLElement>(null);
+  const leftRef = useRef<HTMLDivElement>(null);
+  const rightRef = useRef<HTMLDivElement>(null);
 
-  const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!formRef.current) return;
+  useEffect(() => {
+    if (!sectionRef.current) return;
 
-    const formData = new FormData(formRef.current);
-
-    try {
-      const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbxZDa-eKBQkE_fdOz-OJYMTvKS9ZpQbc2ouOgM6ZiPOEENY8_yP8AuAQ4uxU3lrHd4XrQ/exec", // Replace with your Apps Script URL
-        { method: "POST", body: formData }
-      );
-
-      const result = await response.json();
-
-      if (result.result === "success") {
-        setSuccessMessage("Message sent successfully!");
-        formRef.current.reset();
-      } else {
-        setSuccessMessage("Something went wrong. Try again.");
+    const ctx = gsap.context(() => {
+      if (leftRef.current) {
+        gsap.fromTo(
+          leftRef.current,
+          { x: -100, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 1.2,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 80%",
+            },
+          }
+        );
       }
-    } catch (err) {
-      console.error(err);
-      setSuccessMessage("Error sending message. Try again.");
-    }
-  };
+
+      if (rightRef.current) {
+        gsap.fromTo(
+          rightRef.current,
+          { x: 100, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 1.2,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 80%",
+            },
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section className="w-full bg-white" id="contact">
-      <div className="max-w-xl mx-auto p-6">
-        <h2 className="text-3xl font-bold mb-4">Contact Us</h2>
-
-        {successMessage && (
-          <div className="mb-4 p-3 bg-green-100 text-green-700 rounded">
-            {successMessage}
+    <section ref={sectionRef} className="w-full bg-white" id="contact">
+      <div className="flex flex-col lg:flex-row w-full">
+        {/* Left Info */}
+        <div
+          ref={leftRef}
+          className="bg-[#071f43] text-white px-6 sm:px-12 lg:px-24 py-12 flex-1 flex flex-col gap-6"
+        >
+          <h2 className="font-['Frank_Ruhl_Libre'] text-3xl sm:text-4xl font-bold capitalize">
+            be a blüra being
+          </h2>
+          <p className="font-['Frank_Ruhl_Libre'] text-sm sm:text-base font-light leading-relaxed">
+            blüra is our answer to your luxury that doesn’t come at a planetary
+            cost. It’s a brand built on transparency and taste. A chilled can
+            against your palm. The first sip. The sudden pause inside you.
+            That’s not hydration. That’s healing. That’s nature, grounding you
+            again. <br />
+            <br />
+            If that’s you, welcome. You’re one of us. A{" "}
+            <strong>blüra being</strong>.
+          </p>
+          <div className="flex flex-col gap-4">
+            <div className="flex gap-3 items-center">
+              <div className="w-5 h-5 bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-08-21/CK6SNG0NLD.png)] bg-cover bg-no-repeat" />
+              <span className="font-['Frank_Ruhl_Libre']">+91- 7990394138</span>
+            </div>
+            <div className="flex gap-3 items-center">
+              <div className="w-5 h-5 bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-08-21/WF6wqEaxAH.png)] bg-cover bg-no-repeat" />
+              <span className="font-['Frank_Ruhl_Libre']">
+                contact@bluralife.com
+              </span>
+            </div>
           </div>
-        )}
+        </div>
 
-        <form ref={formRef} onSubmit={sendEmail} className="flex flex-col gap-4">
-          <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            required
-            className="border px-2 py-2"
+        {/* Right Iframe */}
+        <div
+          ref={rightRef}
+          className="bg-white px-6 sm:px-12 lg:px-24 py-12 flex-1"
+        >
+          <h3 className="font-['Frank_Ruhl_Libre'] text-3xl sm:text-4xl mb-2">
+            Have Questions? Let’s Connect!
+          </h3>
+          <p className="font-['Frank_Ruhl_Libre'] text-gray-700 mb-6">
+            We’re here to help - reach out to learn more
+          </p>
+
+          <iframe
+            src="https://kaironixsolution.com/contact-form/"
+            width="100%"
+            height="450"
+            style={{ border: "none" }}
+            title="Contact Form"
           />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            required
-            className="border px-2 py-2"
-          />
-          <input
-            type="tel"
-            name="phone"
-            placeholder="Phone"
-            className="border px-2 py-2"
-          />
-          <select name="business" className="border px-2 py-2">
-            <option value="">Select Business</option>
-            <option value="Cafe">Cafe</option>
-            <option value="Hotels">Hotels</option>
-            <option value="Retailers">Retailers</option>
-            <option value="Event organizers">Event organizers</option>
-            <option value="Distributor">Distributor</option>
-          </select>
-          <textarea
-            name="message"
-            placeholder="Message"
-            required
-            rows={4}
-            className="border px-2 py-2"
-          />
-          <button type="submit" className="bg-blue-700 text-white px-4 py-2">
-            Send
-          </button>
-        </form>
+        </div>
       </div>
     </section>
   );
