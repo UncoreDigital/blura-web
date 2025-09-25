@@ -100,7 +100,7 @@ export default function Contact() {
           </p>
 
           <iframe
-            src="https://kaironixsolution.com/contact-form/"
+            src="https://kaironixsolution.com/blura/blura-life/"
             width="100%"
             height="450"
             style={{ border: "none" }}
