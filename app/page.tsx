@@ -16,11 +16,6 @@ import Contact from "./component/Contact";
 import Hero3 from "./component/Hero3";
 import Hero3Resp from "./component/Hero3Resp";
 import Hero4 from "./component/Hero4";
-import Cursor3 from "./component/Cursor3";
-import Cursor4 from "./component/Cursor4";
-import Cursor5 from "./component/Cursor5";
-import Cursor6 from "./component/Cursor6";
-import Cursor7 from "./component/Cursor7";
 import Cursor8 from "./component/Cursor8";
 import Can2 from "./component/Can2";
 import Footer from "./component/Footer";
@@ -32,7 +27,7 @@ export default function Home() {
       {/* <Hero /> */}
       {/* <Hero2 /> */}
       {/* <Hero3 /> */}
-      <div className="hero-section cursor-none">
+      <div className="hero-section">
         <Hero4 />
       </div>
       {/* <Hero3Resp /> */}

@@ -78,6 +78,19 @@ body {
   width: 120%;
   height: 120%;
 }
+/* Ensure cursor is visible by default */
+* {
+  cursor: auto;
+}
+
+a, button, [role="button"] {
+  cursor: pointer;
+}
+
+input, textarea, select {
+  cursor: text;
+}
+
 @media only screen and (max-device-width: 480px) {
   .justify-center {
     justify-content: center;
