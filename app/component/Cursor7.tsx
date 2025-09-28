@@ -117,11 +117,6 @@ export default function MaskCursor() {
   return (
     <div
       ref={maskRef}
-      style={{
-        borderRadius: "50%",
-        backgroundColor: "#FFFFFF", // your calculated color
-        mixBlendMode: "difference",
-      }}
       className="fixed top-0 left-0 pointer-events-none z-[9999]"
     />
   );

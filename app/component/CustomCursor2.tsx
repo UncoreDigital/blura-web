@@ -78,14 +78,9 @@ export default function CustomCursor() {
     <div
       ref={cursorRef}
       className="
-        fixed top-0 left-0 pointer-events-none z-[9999]
+        fixed top-0 left-0 z-[9999]
         w-10 h-10 rounded-full
       "
-      style={{
-        backgroundColor: "rgba(7,31,67,0.8)", // Dark background with opacity
-        border: "1px solid rgba(255,255,255,0.6)",
-        mixBlendMode: "multiply", // Allows text to appear through
-      }}
     />
   );
 }

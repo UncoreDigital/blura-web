@@ -115,11 +115,6 @@ export default function MaskCursor() {
   return (
     <div
       ref={maskRef}
-      style={{
-        borderRadius: "50%",
-        backgroundColor: "#FFFFFF",
-        mixBlendMode: "difference",
-      }}
       className="hidden sm:block fixed top-0 left-0 pointer-events-none z-[9999]"
     />
   );

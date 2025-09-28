@@ -39,14 +39,6 @@ export default function Cursor4() {
   return (
     <div
       ref={maskRef}
-      style={{
-        width: 80,
-        height: 80,
-        borderRadius: "50%",
-        border: "2px solid rgba(7,31,67,0.8)",
-        backgroundColor: "#071f43",
-        mixBlendMode: "difference", // Only this for effect
-      }}
       className="fixed top-0 left-0 pointer-events-none z-[9999]"
     />
   );

@@ -81,11 +81,6 @@ export default function Cursor3() {
         fixed top-0 left-0 pointer-events-none z-[9999]
         w-10 h-10 rounded-full
       "
-      style={{
-        backgroundColor: "#071f43",
-        opacity: 0.9, // slightly transparent
-        mixBlendMode: "difference", // This makes white text stand out under dark cursor
-      }}
     />
   );
 }
