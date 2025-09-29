@@ -28,33 +28,19 @@ export default function Footer() {
 
           <div className="flex space-x-4">
             <p className="text-sm mb-2">Follow us:</p>
-            <Link href="https://facebook.com" target="_blank">
-              <Image
-                src="/facebook.png"
-                alt="Facebook"
-                width={25}
-                height={25}
-                className="hover:opacity-80 transition"
+            <a href="https://www.instagram.com/bluraofficial/" target="_blank" rel="noopener noreferrer">
+              <div className="w-5 h-5 bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-08-21/CnuVmABEOQ.png)] bg-cover" />
+            </a>
+            <a href="https://wa.me/message/5LPLNODKABRVO1" target="_blank" rel="noopener noreferrer">
+              <div className="w-5 h-5 bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-08-21/SFavkccuQP.png)] bg-cover" />
+            </a>
+            <a href="https://www.linkedin.com/company/bluralife/" target="_blank" rel="noopener noreferrer">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
+                alt="LinkedIn"
+                class="w-5 h-5"
               />
-            </Link>
-            <Link href="https://instagram.com" target="_blank">
-              <Image
-                src="/instagram.png"
-                alt="Instagram"
-                width={30}
-                height={30}
-                className="hover:opacity-80 transition"
-              />
-            </Link>
-            <Link href="https://whatsapp.com" target="_blank">
-              <Image
-                src="/whatsapp.png"
-                alt="whatsapp"
-                width={30}
-                height={30}
-                className="hover:opacity-80 transition"
-              />
-            </Link>
+            </a>
 
           </div>
         </div>
