@@ -6,6 +6,7 @@ import { useState } from "react";
 export default function Footer() {
   const [openTerms, setOpenTerms] = useState(false);
   const [openPrivacy, setOpenPrivacy] = useState(false);
+  const [OpenDisclaimer, setOpenDisclaimer] = useState(false);
   return (
     <footer className="bg-[#071f43] text-white py-6">
       <div className="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between">
@@ -61,12 +62,17 @@ export default function Footer() {
 
         {/* Right: Links */}
         <div className="mt-4 sm:mt-0 text-sm space-x-4">
+          <Link href="#" className="hover:text-gray-300" onClick={() => setOpenPrivacy(true)}>
+            Privacy Policy
+          </Link>
+          <span>|</span>
+
           <Link href="#" className="hover:text-gray-300" onClick={() => setOpenTerms(true)}>
             Terms & Conditions
           </Link>
           <span>|</span>
-          <Link href="#" className="hover:text-gray-300" onClick={() => setOpenPrivacy(true)}>
-            Privacy Policy
+          <Link href="#" className="hover:text-gray-300" onClick={() => setOpenDisclaimer(true)}>
+            Disclaimer
           </Link>
         </div>
       </div>
@@ -129,6 +135,29 @@ export default function Footer() {
                 <span className="font-['Frank_Ruhl_Libre'] text-base sm:text-lg lg:text-[18px] font-semibold text-black text-center">
                   contact@bluralife.com.
                 </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {OpenDisclaimer && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-lg p-6 max-w-lg w-full relative">
+            <button
+              onClick={() => setOpenDisclaimer(false)}
+              className="absolute top-3 right-3 text-gray-600 hover:text-black text-xl"
+            >
+              ✕
+            </button>
+            <h2 className="text-2xl font-bold mb-4 font-['Frank_Ruhl_Libre'] text-gray-700">
+              Disclaimer
+            </h2>
+            <div className="font-['Frank_Ruhl_Libre'] text-sm leading-relaxed text-gray-700 max-h-80 overflow-y-auto space-y-4">
+              <p>This website is intended to share information about Blüra’s natural mineral water and our brand ethos.
+                While we take care to ensure accuracy, details may change without notice.
+                Blüra is a packaged natural mineral water brand — please store in a cool, dry place and consume immediately after opening.
+                We are not liable for any loss or damage arising from the use of this website or the product in ways other than recommended.
               </p>
             </div>
           </div>
