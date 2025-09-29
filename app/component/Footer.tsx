@@ -62,18 +62,36 @@ export default function Footer() {
 
         {/* Right: Links */}
         <div className="mt-4 sm:mt-0 text-sm space-x-4">
-          <Link href="#" className="hover:text-gray-300" onClick={() => setOpenPrivacy(true)}>
+          <button 
+            className="hover:text-gray-300 bg-transparent border-none text-white cursor-pointer text-sm"
+            onClick={(e) => {
+              e.preventDefault();
+              setOpenPrivacy(true);
+            }}
+          >
             Privacy Policy
-          </Link>
+          </button>
           <span>|</span>
 
-          <Link href="#" className="hover:text-gray-300" onClick={() => setOpenTerms(true)}>
+          <button 
+            className="hover:text-gray-300 bg-transparent border-none text-white cursor-pointer text-sm"
+            onClick={(e) => {
+              e.preventDefault();
+              setOpenTerms(true);
+            }}
+          >
             Terms & Conditions
-          </Link>
+          </button>
           <span>|</span>
-          <Link href="#" className="hover:text-gray-300" onClick={() => setOpenDisclaimer(true)}>
+          <button 
+            className="hover:text-gray-300 bg-transparent border-none text-white cursor-pointer text-sm"
+            onClick={(e) => {
+              e.preventDefault();
+              setOpenDisclaimer(true);
+            }}
+          >
             Disclaimer
-          </Link>
+          </button>
         </div>
       </div>
 
